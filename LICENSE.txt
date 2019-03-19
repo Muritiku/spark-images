@@ -1,7 +1,6 @@
 WARNING !!!! All JDBC drivers provided by their vendors free sources 'as is',
 and should be used with respect to their licenses.
 ---
-
 Copyright (c) 2019 Anton Dziavitsyn a.dziavitsyn@gmail.com
 http://github.com/Muritiku/spark-images
 ---
