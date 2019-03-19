@@ -6,10 +6,16 @@
 + Jupyter with pyspark images (compatible with cluster images to connect)
 
 ## DockerHub builded images links
++ [muritiku/spark-base](https://hub.docker.com/r/muritiku/spark-base)
 + [muritiku/spark-master](https://hub.docker.com/r/muritiku/spark-master)
 + [muritiku/spark-worker](https://hub.docker.com/r/muritiku/spark-worker)
 + [muritiku/spark-jupyter](https://hub.docker.com/r/muritiku/spark-jupyter)
-
+  
+## Introduction
+These centos 7 based images, contain Spark+Hadoop for standalone cluster creation, with additions:
++ Java 1.8 openjdk
++ anaconda 3.7 (with numpy, scipy, matplotlib etc...)
+  
 ## Spark Cluster creation example
 Here the example of cluster compose file `./spark-cluster.yml`:
 ```yaml
