@@ -127,15 +127,15 @@ def task(sparkContext, sparkSession):
 **How to run the image?**  
 To run in with example tasks - just run command in repository root:
 ```bash
-docker run --name spark-datasource -p 10000:10000 -v ${PWD}/spark-jdbc-datasource/tasks:/spark_tasks/tasks muritiku/spark-virtual-datasource
+docker run --name spark-datasource -p 10000:10000 -v ${PWD}/spark-virtual-datasource/tasks:/spark_tasks/tasks muritiku/spark-virtual-datasource
 ```
-**NOTE:** You may attach your tasks directory, by changing `${PWD}/spark-jdbc-datasource/tasks` to it's location.  
+**NOTE:** You may attach your tasks directory, by changing `${PWD}/spark-virtual-datasource/tasks` to it's location.  
   
 Now You can connect to datasource by ODBC/JDBC port 10000 with using Spark thrift/hive2 driver.  By SQL command `SHOW TABLES` - you will get your generated views.  
   
 **How to stop the server?**  
 Just stop the container in separate bash session:
-```python
+```bash
 docker stop spark-datasource
 ```
 
