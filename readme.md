@@ -1,11 +1,14 @@
 # Spark based images
 **by Anton Dziavitsyn 2019**  
-[a.dziavitsyn@gmail.com](mailto:a.dziavitsyn@gmail.com)
+[a.dziavitsyn@gmail.com](mailto:a.dziavitsyn@gmail.com)  
   
+Repository on GitHub: [https://github.com/Muritiku/spark-images](https://github.com/Muritiku/spark-images)  
+  
+Content:
 + Spark Cluster Images
 + Jupyter with pyspark images (compatible with cluster images to connect)
 
-## DockerHub builded images links
+## DockerHub builded images links (look at using examples below)
 + [muritiku/spark-base](https://hub.docker.com/r/muritiku/spark-base)
 + [muritiku/spark-master](https://hub.docker.com/r/muritiku/spark-master)
 + [muritiku/spark-worker](https://hub.docker.com/r/muritiku/spark-worker)
@@ -57,4 +60,48 @@ networks:
   spark-network:
     # driver: overlay # for docker stack deploy
 
+```
+  
+## Using of spark-jupyter image
+  
+Run image with notebooks in current directory by command:
+```bash
+docker run --name spark-jupyter -p 8888:8888 -v ${PWD}:/home/jupyter muritiku/spark-jupyter
+```
+NOTE: *If you want to connect to spark cluster - use* `--network host` *instead of* `-p 8888:8888`
+  
+Open Jupyter Lab in web browser: [http://localhost:8888](http://localhost:8888)  
+  
+Test example for spark:
+```python
+#Spark test
+
+import findspark
+findspark.init()
+
+from pyspark.sql import SparkSession
+import random
+
+# for local spark core test
+spark = SparkSession.builder.appName('local-test').getOrCreate()
+# for spark cluster core test
+#spark = SparkSession.builder.appName('cluster-test').master('spark://[SPARK MASTER URL]:7077').getOrCreate()
+sc = spark.sparkContext
+
+# Calculate Pi with distributed computing
+num_samples = 100000
+def inside(p):     
+  x, y = random.random(), random.random()
+  return x*x + y*y < 1
+
+count = sc.parallelize(range(0, num_samples)).filter(inside).count()
+pi = 4 * count / num_samples
+print(pi)
+
+# SQL context test
+from pyspark.sql import SQLContext
+sqlContext = SQLContext(sc)
+
+df = spark.sql('''select 'spark' as hello ''')
+df.show()
 ```
